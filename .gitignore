@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 .env
-common/firebase.jsx
+src/common/firebase.jsx
 
 
 # Editor directories and files
