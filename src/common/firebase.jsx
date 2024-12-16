@@ -4,9 +4,12 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+const api = import.meta.env.FIREBASE_API_KEY;
+// console.log(api);
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.FIREBASE_API_KEY,
+  apiKey: `${api}`, // this will give error so while running the app get the api key form .env and paste it here after that it will work
   authDomain: "mern-blogging-website-e4327.firebaseapp.com",
   projectId: "mern-blogging-website-e4327",
   storageBucket: "mern-blogging-website-e4327.appspot.com",
