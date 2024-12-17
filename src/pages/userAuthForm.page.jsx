@@ -13,7 +13,7 @@ import { authWithGoogle } from "../common/firebase";
 
 const UserAuthForm = ({ type }) => {
 
-    let {userAuth: {access_token}, setUserAuth} = useContext(UserContext)
+    let { userAuth: { access_token }, setUserAuth } = useContext(UserContext)
     //console.log(access_token);
 
     const UserAuthThroughServer = (serverRoute, formData) => {
@@ -73,17 +73,17 @@ const UserAuthForm = ({ type }) => {
         e.preventDefault();
 
         authWithGoogle().then(user => {
-            
+
             let serverRoute = "/google-auth";
             let formData = {
                 access_token: user.accessToken
             }
             UserAuthThroughServer(serverRoute, formData)
         })
-        .catch(err => {
-            toast.error("Trouble While Login Through Google");
-            return console.log(err)
-        })
+            .catch(err => {
+                toast.error("Trouble While Login Through Google");
+                return console.log(err)
+            })
 
     }
 
@@ -100,6 +100,7 @@ const UserAuthForm = ({ type }) => {
 
                         {
                             type != "sign-in" ?
+
                                 <InputBox
                                     name="fullname"
                                     type="text"
