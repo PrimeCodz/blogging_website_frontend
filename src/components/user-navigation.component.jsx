@@ -39,7 +39,7 @@ const UserNavigationPanel = () => {
                 <span className="absolute border-t border-grey w-[100%]"></span>
 
                 <button className="text-left p-4 hover:bg-grey w-full pl-8 py-4" onClick={signOutUser}>
-                    <h1 className="font-bold text-xl mg-1">Sign Out</h1>
+                    <h1 className="font-bold text-xl mt-1">Sign Out</h1>
                     <p className="text-dark-grey ">@{username}</p>
                 </button>
             </div>
