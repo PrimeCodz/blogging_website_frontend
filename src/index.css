@@ -109,7 +109,7 @@
     }
 
     .tag {
-        @apply p-3 bg-grey rounded-full px-6 capitalize;
+        @apply p-3 bg-grey hover:bg-gray-100/80 dark:hover:bg-gray-200/10 rounded-full px-6 capitalize;
     }
 
     .blog-title {

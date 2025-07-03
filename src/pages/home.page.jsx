@@ -143,7 +143,7 @@ const HomePage = () => {
                                 <div className="flex gap-3 flex-wrap">
                                     {categories.map((category, i) => {
                                         return (
-                                            <button className={"tag " + (pageState == category ? "bg-black text-white" : " ")} key={i} onClick={loadBlogByCategory}>{category}</button>
+                                            <button className={"tag " + (pageState == category ? "bg-black text-white pointer-events-none" : " ")} key={i} onClick={loadBlogByCategory}>{category}</button>
                                         );
                                     })
                                     }
