@@ -36,10 +36,10 @@ export default {
                 'purple': '#8B46FF'
             },
             dark: {
-                'white': '#242424',
+                'white': '#0a0a0a',
                 'black': '#F3F3F3',
-                'grey': '#2A2A2A',
-                'dark-grey': '#E7E7E7',
+                'grey': '#171717',
+                'dark-grey': '#a1a1a1',
                 'red': '#991F1F',
                 'transparent': 'transparent',
                 'twitter': '#0E71A8',
