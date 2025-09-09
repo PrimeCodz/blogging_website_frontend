@@ -12,6 +12,7 @@ import { uploadImage } from "../common/aws";
 import { EditorContext } from "../pages/editor.pages";
 import { tools } from "./tools.component";
 import { ThemeContext, UserContext } from "../App";
+import { useState } from "react";
 
 
 const BlogEditor = () => {
@@ -19,8 +20,10 @@ const BlogEditor = () => {
     let { blog, blog: { title, banner, content, tags, des }, setBlog, textEditor, setTextEditor, setEditorState } = useContext(EditorContext);
     let { userAuth: { access_token } } = useContext(UserContext);
     let { theme } = useContext(ThemeContext);
-    let {blog_id} = useParams();
+    let { blog_id } = useParams();
     let navigate = useNavigate();
+
+    const [isDragging, setIsDragging] = useState(false);
 
     // useEffect textEditor
     useEffect(() => {
@@ -33,6 +36,28 @@ const BlogEditor = () => {
             }))
         }
     }, [])
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+    }
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+    }
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith("image/")) {
+            handleBannerUpload({ target: { files: [file] } });
+        } else {
+            toast.error("Invalid file type. Please upload an image.");
+        }
+    }
 
     const handleBannerUpload = (e) => {
 
@@ -169,9 +194,9 @@ const BlogEditor = () => {
 
                     <div className="mx-auto max-w-[900px] w-full">
 
-                        <div className="relative aspect-video bg-white border-4 border-grey hover:opacity-80">
+                        <div className={"relative aspect-video bg-white border-4 hover:opacity-80 transition-all duration-300 " + (isDragging ? "border-purple/30" : "border-grey")} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
                             <label htmlFor="uploadBanner">
-                                <img src={theme == "light" ? lightBanner : darkBanner} onError={handleError} className="z-20" />
+                                <img src={banner || (theme == "light" ? lightBanner : darkBanner)} onError={handleError} className="z-20" />
                                 <input id="uploadBanner" type="file" accept=".png, .jpg, .jpeg" hidden onChange={handleBannerUpload} />
                             </label>
                         </div>

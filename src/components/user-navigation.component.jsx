@@ -6,7 +6,7 @@ import { removeFromSession } from "../common/session";
 
 const UserNavigationPanel = () => {
 
-    const { userAuth: { username }, setUserAuth } = useContext(UserContext);
+    const { userAuth: { username, role }, setUserAuth } = useContext(UserContext);
     const signOutUser = () => {
         // sign out logic here
         removeFromSession("user");
@@ -19,16 +19,19 @@ const UserNavigationPanel = () => {
         <AnimationWrapper transition={{ duration: 0.2 }} className="absolute right-0 z-50">
             <div className="bg-white absolute right-0 border border-grey w-60 overflow-hidden duration-200">
 
-                <Link to="/editor" className="flex gap-2 link md:hidden pl-8 py-4">
-                    <i className="fi fi-rr-file-edit"></i>
-                    <p>Write</p>
-                </Link>
+                {role !== "admin" && (
+                    <Link to="/editor" className="flex gap-2 link md:hidden pl-8 py-4">
+                        <i className="fi fi-rr-file-edit"></i>
+                        <p>Write</p>
+                    </Link>
+                )
+                }
 
                 <Link to={`/user/${username}`} className="link pl-8 py-4">
                     Profile
                 </Link>
 
-                <Link to="/dashboard/blogs" className="link pl-8 py-4">
+                <Link to="/dashboard/stats" className="link pl-8 py-4">
                     Dashboard
                 </Link>
 

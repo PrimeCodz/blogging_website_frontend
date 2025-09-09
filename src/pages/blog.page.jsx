@@ -29,7 +29,7 @@ const BlogPage = () => {
     const [isLikedByUser, setIsLikedByUser] = useState(false);
     const [commentsWrapper, setCommentsWrapper] = useState(false);
     const [totalParentCommentsLoaded, setTotalParentCommentsLoaded] = useState(0);
-    let { title, content, banner, author: { personal_info: { fullname, username: author_username, profile_img } }, publishedAt } = blog;
+    let { title, content, banner, author: { personal_info: { fullname, username: author_username, profile_img } }, publishedAt, updatedAt } = blog;
 
 
     const fetchBlog = () => {
@@ -101,7 +101,10 @@ const BlogPage = () => {
                                                 <Link to={`/user/${author_username}`} className="text-dark-grey hover:text-black">@{author_username}</Link>
                                             </p>
                                         </div>
-                                        <p className="text-dark-grey opacity-75 max-sm:mt-6 max-sm:ml-12 max-sm:pl-5">Published On {getDates(publishedAt)}</p>
+                                        <div className="flex flex-col">
+                                            <p className="text-dark-grey opacity-75 max-sm:mt-6 max-sm:ml-12 max-sm:pl-5">Published On {getDates(publishedAt)}</p>
+                                            <p className="text-dark-grey opacity-75 max-sm:ml-12 max-sm:pl-5">Updated On {getDates(updatedAt)}</p>
+                                        </div>
                                     </div>
                                 </div>
 

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar.component";
 import UserAuthForm from "./pages/userAuthForm.page";
 import { lookInSession } from "./common/session";
@@ -14,6 +14,10 @@ import ChangePassword from "./pages/change-password.page";
 import EditProfile from "./pages/edit-profile.page";
 import NotificationContainer from "./pages/notifications.page";
 import ManageBlogs from "./pages/manage-blogs.page";
+import Dashboard from "./pages/dashboard.page";
+import ManageUsers from "./pages/manage.users.page";
+import VerifyBlog from "./pages/verify.blog.page";
+import LandingPage from "./pages/landing.page";
 
 
 export const UserContext = createContext({});
@@ -24,7 +28,7 @@ const darkThemePreference = () => window.matchMedia("(prefers-color-scheme: dark
 const App = () => {
     const [userAuth, setUserAuth] = useState({});
     const [theme, setTheme] = useState(() => darkThemePreference() ? "dark" : "light");
-
+    // console.log(userAuth);
     useEffect(() => {
         let userInSession = lookInSession("user");
         let themeInSession = lookInSession("theme");
@@ -43,6 +47,11 @@ const App = () => {
 
     }, []);
 
+    // Role-based route protection
+    const RequireAdmin = ({ children }) => {
+        return userAuth?.role === "admin" ? children : <Navigate to="/dashboard/dash-stats" />
+    }
+
     return (
         <>
             <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -51,10 +60,14 @@ const App = () => {
                         <Route path="/editor" element={<EditorPage />} />
                         <Route path="/editor/:blog_id" element={<EditorPage />} />
                         <Route path="/" element={<Navbar />}>
-                            <Route index element={<HomePage />} />
+                            <Route index element={<LandingPage />} />
+                            <Route path="home" element={<HomePage />} />
                             <Route path="dashboard" element={<SideNav />} >
+                                <Route path="stats" element={<Dashboard />} />
                                 <Route path="blogs" element={<ManageBlogs />} />
                                 <Route path="notifications" element={<NotificationContainer />} />
+                                <Route path="verify-blogs" element={<RequireAdmin><VerifyBlog /></RequireAdmin>} />
+                                <Route path="manage-users" element={<RequireAdmin><ManageUsers/></RequireAdmin>} />
                             </Route>
                             <Route path="settings" element={<SideNav />} >
                                 <Route path="edit-profile" element={<EditProfile />} />

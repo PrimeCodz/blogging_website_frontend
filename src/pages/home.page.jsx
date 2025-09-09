@@ -96,6 +96,10 @@ const HomePage = () => {
     return (
         <>
             <AnimationWrapper>
+                {/* Ads
+                    <div className="w-40 max-w-[160px] bg-blue-400 relative hidden lg:block">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-center text-white text-2xl w-full bg-blue-700 font-bold">Ads</div>
+                    </div> */}
                 <section className="h-cover flex justify-center gap-10">
                     {/* Latest Blogs */}
                     <div className="w-full">

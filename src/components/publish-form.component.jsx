@@ -91,7 +91,7 @@ const PublishForm = () => {
             .then(() => {
                 e.target.classList.remove('disable');
                 toast.dismiss(loadingToast);
-                toast.success("Blog Published Successfully 👍");
+                toast.success("Blog Published & Sent For Review Successfully 👍");
 
                 setTimeout(() => {
                     navigate("/dashboard/blogs")

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import InputBox from "../components/input.component";
@@ -13,7 +13,8 @@ import { authWithGoogle } from "../common/firebase";
 
 const UserAuthForm = ({ type }) => {
 
-    let { userAuth: { access_token }, setUserAuth } = useContext(UserContext)
+    const navigate = useNavigate();
+    let { userAuth: { access_token, role }, setUserAuth } = useContext(UserContext)
     //console.log(access_token);
 
     const UserAuthThroughServer = (serverRoute, formData) => {
@@ -22,6 +23,14 @@ const UserAuthForm = ({ type }) => {
             .then(({ data }) => {
                 storeInSession("user", JSON.stringify(data))
                 setUserAuth(data)
+
+                // Redirect based on role
+                if (data?.role === "admin") {
+                    navigate("/dashboard/dash-stats");
+                }
+                else {
+                    navigate("/home");
+                }
             })
             .catch(({ response }) => {
                 toast.error(response.data.error)
@@ -89,7 +98,7 @@ const UserAuthForm = ({ type }) => {
 
     return (
         access_token ?
-            <Navigate to="/" />
+            role === "admin" ? <Navigate to="/dashboard/dash-stats" /> : <Navigate to="/home" />
             : <AnimationWrapper keyValue={type}>
                 <section className="h-cover flex items-center justify-center">
                     <Toaster />

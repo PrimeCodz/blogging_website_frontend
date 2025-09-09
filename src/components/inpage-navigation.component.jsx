@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export let activeTabLineRef;
 export let activeTabRef;
 
-const InPageNavigation = ({ routes, defaultHidden = [], defaultActiveIndex = 0, children }) => {
+const InPageNavigation = ({ routes, defaultHidden = [], defaultActiveIndex = 0, onTabChange = () => {},children }) => {
 
     activeTabLineRef = useRef();
     activeTabRef = useRef();
@@ -19,11 +19,12 @@ const InPageNavigation = ({ routes, defaultHidden = [], defaultActiveIndex = 0, 
         activeTabLineRef.current.style.left = offsetLeft + "px";
 
         setInPageNavIndex(i);
+        onTabChange(i); //notify parent of tab change
     }
 
     useEffect(() => {
 
-        if (width > 766 && inPageNavIndex != defaultActiveIndex) {
+        if (width > 766 && activeTabRef.current && activeTabLineRef.current) { // changed the inpagenavindex !== defaultActiveIndex so if any error or ui issue occurs change it to this
             changePageState(activeTabRef.current, defaultActiveIndex)
         }
 
