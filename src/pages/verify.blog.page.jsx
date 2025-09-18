@@ -1,11 +1,9 @@
 import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../App";
-import { getFullDate } from "../common/date";
 import Loader from "../components/loader.component";
 import AnimationWrapper from "../common/page-animation";
 import toast, { Toaster } from "react-hot-toast";
-import BlogContent from "../components/blog-content.component";
 import { filterPaginationData } from "../common/filter-pagination-data";
 import { useSearchParams } from "react-router-dom";
 import NoDataMessage from "../components/nodata.component";
