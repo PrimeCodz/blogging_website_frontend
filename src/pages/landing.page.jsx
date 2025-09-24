@@ -24,7 +24,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     {/* Footer Section */}
-                    <footer className="mt-1 py-2 px-10 md:px-20 flex flex-row flex-wrap items-center gap-2 md:gap-4 justify-center text-sm text-dark-grey/40">
+                    <footer className="mt-1 py-2 px-3 md:px-20 flex flex-row flex-wrap items-center gap-2 md:gap-4 justify-center text-sm text-dark-grey/40">
                         <p className="hover:text-dark-grey text-sm md:text-base cursor-pointer">About</p>
                         <p className="hover:text-dark-grey text-sm md:text-base cursor-pointer">Help</p>
                         <p className="hover:text-dark-grey text-sm md:text-base cursor-pointer">Privacy Policy</p>
