@@ -26,7 +26,7 @@ const UserAuthForm = ({ type }) => {
 
                 // Redirect based on role
                 if (data?.role === "admin") {
-                    navigate("/dashboard/dash-stats");
+                    navigate("/dashboard/stats");
                 }
                 else {
                     navigate("/home");
